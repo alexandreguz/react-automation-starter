@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import Ftp from './components/TestCategories/Ftp';
 import CreateUser from './components/TestCategories/CreateUser';
+import { commandOptions, environmentOptions, categories } from './constants';
 
 function App() {
   const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
@@ -10,28 +11,6 @@ function App() {
   const [selectedEnvironment, setSelectedEnvironment] = useState('qa');
   const [output, setOutput] = useState('');
   const [isCategorySelected, setIsCategorySelected] = useState(false);
-
-  const commandOptions = [
-    { category: 'FTP', label: 'Upload Remessa FTP', value: 'MIX_ENV=qa mix test test/regression/non_ui/ftp/upload_remessa_one_receivable_test.exs' },
-    { category: 'FTP', label: 'Aprovar Remessa', value: 'MIX_ENV=qa mix test test/regression/non_ui/ftp/upload_remessa_one_receivable_test.exs' },
-    { category: 'FTP', label: 'Verificar Remessa Qualificada', value: 'MIX_ENV=qa mix test test/regression/non_ui/ftp/upload_remessa_one_receivable_test.exs' },
-    { category: 'FTP', label: 'Upload Retorno', value: 'MIX_ENV=qa mix test test/regression/non_ui/ftp/upload_remessa_one_receivable_test.exs' },
-    { category: 'FTP', label: 'Verificar Retorno Qualificado', value: 'MIX_ENV=qa mix test test/regression/non_ui/ftp/upload_remessa_one_receivable_test.exs' },
-
-
-    { category: 'CREATE USER', label: 'Make Credit User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-    { category: 'CREATE USER', label: 'Make Current Account User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-    { category: 'CREATE USER', label: 'Make Cambio User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-    { category: 'CREATE USER', label: 'Make Finvendas User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-    { category: 'CREATE USER', label: 'Make Ancora User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-    { category: 'CREATE USER', label: 'Make Referral User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
-
-    // Adicione mais opções conforme necessário
-  ];
-
-  const environmentOptions = ['qa', 'qa2', 'qa-venus'];
-
-  const categories = ['FTP', 'CREATE USER'];
 
   const runCommand = async () => {
     const selectedOption = commandOptions.find(option => option.label === selectedCommand && option.category === selectedCategory);
