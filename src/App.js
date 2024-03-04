@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [directory, setDirectory] = useState('');
+  const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
   const [selectedCommand, setSelectedCommand] = useState('');
+  const [selectedEnvironment, setSelectedEnvironment] = useState('qa');
   const [output, setOutput] = useState('');
 
   const commandOptions = [
@@ -10,6 +11,8 @@ function App() {
     { label: 'Make Credit User', value: 'MIX_ENV=qa mix test test/regression/open_sea/cadastro/credito_user_test.exs' },
     // Adicione mais opções conforme necessário
   ];
+
+  const environmentOptions = ['qa', 'qa2', 'qa-venus'];
 
   const runCommand = async () => {
     const selectedOption = commandOptions.find(option => option.label === selectedCommand);
@@ -21,8 +24,11 @@ function App() {
 
     const { value: selectedCommandValue } = selectedOption;
 
+    const finalCommand = selectedCommandValue.replace(/qa/g, selectedEnvironment);
+
     try {
-      const response = await fetch(`http://localhost:3001/run-command?dir=${encodeURIComponent(directory)}&command=${encodeURIComponent(selectedCommandValue)}`);
+      const response = await fetch(`http://localhost:3001/run-command?dir=${encodeURIComponent(directory)}&command=${encodeURIComponent(finalCommand)}`);
+
       const data = await response.text();
       setOutput(data);
     } catch (error) {
@@ -55,6 +61,18 @@ function App() {
           ))}
         </select>
       </label>
+      <br />
+      <label>
+        Selecione o Ambiente:
+        <select value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
+          {environmentOptions.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+      <br />
 
       <br />
       <button onClick={runCommand}>Executar Comando</button>
