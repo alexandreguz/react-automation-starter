@@ -46,29 +46,6 @@ function App() {
     }
   };
 
-  const renderCommandDropdown = () => {
-    if (isCategorySelected) {
-      const categoryCommands = commandOptions
-      .filter(option => option.category === selectedCategory)
-      .map((option, index) => (
-        <option key={index} value={option.label}>
-          {option.label}
-        </option>
-      ));
-      return (
-        
-        <label>
-          Selecione o Comando:
-          <select onChange={(e) => setSelectedCommand(e.target.value)}>
-            <option value="" disabled hidden>Selecione um Comando</option>
-            {categoryCommands}
-          </select>
-        </label>
-      );
-    }
-    return null;
-  };
-
   return (
     <div>
       <NavBar
@@ -104,7 +81,6 @@ function App() {
 
           <br />
           {renderTestCategoryComponent()}
-          {renderCommandDropdown()}
 
           <br />
           <br />
