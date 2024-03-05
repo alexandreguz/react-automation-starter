@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Ftp from './components/TestCategories/Ftp';
 import CreateUser from './components/TestCategories/CreateUser';
 import { commandOptions, environmentOptions, categories } from './constants';
+import Cuc from './components/TestCategories/Cuc';
 
 function App() {
   const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
@@ -40,7 +41,9 @@ function App() {
         return <Ftp commands={commandOptions.filter(option => option.category === 'FTP')} onSelectCommand={setSelectedCommand} />;
       case 'CREATE USER':
         return <CreateUser commands={commandOptions.filter(option => option.category === 'CREATE USER')} onSelectCommand={setSelectedCommand} />;
-      // Adicione mais casos conforme necessário
+      case "CUC":
+        return <Cuc commands={commandOptions.filter(option => option.category === "CUC")} onSelectCommand={setSelectedCommand} />
+        // Adicione mais casos conforme necessário
       default:
         return null;
     }
@@ -67,7 +70,7 @@ function App() {
               onChange={(e) => setDirectory(e.target.value)}
             />
           </label>
-<br/>
+        <br/>
           <label>
             Selecione o Ambiente:
             <select value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
