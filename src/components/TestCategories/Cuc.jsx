@@ -1,12 +1,13 @@
-// components/TestCategories/Cuc.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
-function Cuc({ commands, onSelectCommand }) {
+function Cuc({ commands, onSelectCommand, runCommand }) {
+  const [selectedCommand, setSelectedCommand] = useState('');
+
   return (
     <div>
       <label>
         Selecione o Comando:
-        <select onChange={(e) => onSelectCommand(e.target.value)}>
+        <select onChange={(e) => setSelectedCommand(e.target.value)}>
           <option value="">Selecione um Comando</option>
           {commands.map((command, index) => (
             <option key={index} value={command.label}>
@@ -15,6 +16,7 @@ function Cuc({ commands, onSelectCommand }) {
           ))}
         </select>
       </label>
+      <button onClick={() => runCommand(selectedCommand)}>Executar Comando</button>
     </div>
   );
 }
