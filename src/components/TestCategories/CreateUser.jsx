@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import CommandExecutorButton from '../CommandExecutorButton';
 
-function CreateUser({ commands, onSelectCommand, runCommand }) {
+function CreateUser({ commands, runCommand }) {
   const [selectedCommand, setSelectedCommand] = useState('');
 
   return (
@@ -15,7 +16,7 @@ function CreateUser({ commands, onSelectCommand, runCommand }) {
             </option>
           ))}
         </select>
-        <button onClick={() => runCommand(selectedCommand)}>Executar Comando</button>
+        <CommandExecutorButton onClick={() => runCommand(selectedCommand)} />
       </label>
     </div>
   );

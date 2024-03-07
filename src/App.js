@@ -8,7 +8,6 @@ import { commandOptions, environmentOptions, categories } from './constants';
 function App() {
   const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedCommand, setSelectedCommand] = useState('');
   const [selectedEnvironment, setSelectedEnvironment] = useState('qa');
   const [output, setOutput] = useState('');
   const [isCategorySelected, setIsCategorySelected] = useState(false);
@@ -39,11 +38,11 @@ function App() {
   const renderTestCategoryComponent = () => {
     switch (selectedCategory) {
       case 'FTP':
-        return <Ftp commands={commandOptions.filter((option) => option.category === 'FTP')} onSelectCommand={setSelectedCommand} runCommand={runCommand} />;
+        return <Ftp commands={commandOptions.filter((option) => option.category === 'FTP')} runCommand={runCommand} />;
       case 'CREATE USER':
-        return <CreateUser commands={commandOptions.filter((option) => option.category === 'CREATE USER')} onSelectCommand={setSelectedCommand} runCommand={runCommand}/>;
+        return <CreateUser commands={commandOptions.filter((option) => option.category === 'CREATE USER')} runCommand={runCommand}/>;
       case "CUC":
-        return <Cuc commands={commandOptions.filter(option => option.category === "CUC")} onSelectCommand={setSelectedCommand} runCommand={runCommand} />
+        return <Cuc commands={commandOptions.filter(option => option.category === "CUC")}  runCommand={runCommand} />
 
         // Adicione mais casos conforme necessário
       default:

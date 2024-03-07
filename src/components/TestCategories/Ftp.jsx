@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import CommandExecutorButton from '../CommandExecutorButton';
 
-function Ftp({ commands, onSelectCommand, runCommand }) {
+function Ftp({ commands, runCommand }) {
   const [selectedCommand, setSelectedCommand] = useState('');
 
   return (
@@ -16,7 +17,7 @@ function Ftp({ commands, onSelectCommand, runCommand }) {
           ))}
         </select>
       </label>
-      <button onClick={() => runCommand(selectedCommand)}>Executar Comando</button>
+      <CommandExecutorButton onClick={() => runCommand(selectedCommand)} />
     </div>
   );
 }
