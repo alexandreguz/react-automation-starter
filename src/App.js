@@ -9,42 +9,17 @@ function App() {
   const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedEnvironment, setSelectedEnvironment] = useState('qa');
-  const [output, setOutput] = useState('');
   const [isCategorySelected, setIsCategorySelected] = useState(false);
-
-  const runCommand = async (selectedCommand) => {
-    const selectedOption = commandOptions.find(
-      (option) => option.label === selectedCommand && option.category === selectedCategory
-    );
-    if (!selectedOption) {
-      setOutput('Comando não encontrado.');
-      return;
-    }
-    const { value: selectedCommandValue } = selectedOption;
-    const finalCommand = selectedCommandValue.replace(/qa/g, selectedEnvironment);
-
-    try {
-      const response = await fetch(
-        `http://localhost:3001/run-command?dir=${encodeURIComponent(directory)}&command=${encodeURIComponent(finalCommand)}`
-      );
-      const data = await response.text();
-      setOutput(data);
-    } catch (error) {
-      console.error('Erro ao enviar solicitação ao servidor:', error.message);
-      setOutput('Erro ao executar o comando', "Error message :", error.message);
-    }
-  };
+  const [selectedCommand, setSelectedCommand] = useState('');
 
   const renderTestCategoryComponent = () => {
     switch (selectedCategory) {
       case 'FTP':
-        return <Ftp commands={commandOptions.filter((option) => option.category === 'FTP')} runCommand={runCommand} />;
+        return <Ftp commands={commandOptions.filter((option) => option.category === 'FTP')} setSelectedCommand={setSelectedCommand} selectedEnvironment={selectedEnvironment} />;
       case 'CREATE USER':
-        return <CreateUser commands={commandOptions.filter((option) => option.category === 'CREATE USER')} runCommand={runCommand}/>;
+        return <CreateUser commands={commandOptions.filter((option) => option.category === 'CREATE USER')} setSelectedCommand={setSelectedCommand} selectedEnvironment={selectedEnvironment}/>;
       case "CUC":
-        return <Cuc commands={commandOptions.filter(option => option.category === "CUC")}  runCommand={runCommand} />
-
-        // Adicione mais casos conforme necessário
+        return <Cuc commands={commandOptions.filter(option => option.category === "CUC")}  setSelectedCommand={setSelectedCommand} selectedEnvironment={selectedEnvironment}/>;
       default:
         return null;
     }
@@ -71,7 +46,7 @@ function App() {
               onChange={(e) => setDirectory(e.target.value)}
             />
           </label>
-        <br/>
+          <br/>
           <label>
             Selecione o Ambiente:
             <select value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
@@ -82,10 +57,8 @@ function App() {
               ))}
             </select>
           </label>
-
           <br />
           {renderTestCategoryComponent()}
-
           <br />
           <br />
 
@@ -94,16 +67,8 @@ function App() {
         <p>Escolha uma categoria no NavBar</p>
       )}
       <br />
-      <div>
-        <strong>Saída do Comando:</strong>
-        <pre>{output}</pre>
-      </div>
     </div>
   );
 }
 
 export default App;
-
-
-// clean output when beggining to run new test
-// parse the output to receive the user cnpj and tesresult
