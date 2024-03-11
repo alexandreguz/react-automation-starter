@@ -5,6 +5,8 @@ import { commandOptions } from '../../constants';
 function Ftp({selectedEnvironment}) {
   const [selectedCommand, setSelectedCommand] = useState('');
   const [output, setOutput] = useState('');
+  const [loading, setLoading] = useState(false);
+
 
   const ftpCommands = commandOptions
     .filter((option) => option.category === 'FTP')
@@ -29,11 +31,18 @@ function Ftp({selectedEnvironment}) {
         selectedEnvironment={selectedEnvironment}
         directory="/Users/alexandreguz/Documents/BS2/qa/automation"
         setOutput={setOutput}
+        setLoading={setLoading}
+        loading={loading}
       />
       <br />
+      <div>{
+        loading ? <p>Aguarde, o teste ainda está rodando...</p> :
       <div>
-        <strong>Saída do Comando:</strong>
+      <strong>Saída do Comando:</strong>
         <pre>{output}</pre>
+        </div>
+      }
+        
       </div>
     </div>
   );

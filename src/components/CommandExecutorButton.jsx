@@ -1,7 +1,6 @@
-import React from 'react';
 import { commandOptions } from '../constants';
 
-function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvironment, directory, setOutput }) {
+function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvironment, directory, setOutput, setLoading , loading}) {
   const runCommand = async () => {
     console.log("selectedCommand :", selectedCommand)
     console.log("selectedCategory", selectedCategory)
@@ -20,6 +19,7 @@ function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvi
     console.log("finalCommand", finalCommand)
     try {
         console.log("directory: ", directory)
+        setLoading(true);
       const response = await fetch(`http://localhost:3001/run-command?dir=${encodeURIComponent(directory)}&command=${encodeURIComponent(finalCommand)}`);
       const data = await response.json();
       if (data.success) {
@@ -30,11 +30,18 @@ function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvi
     } catch (error) {
       console.error('Erro ao enviar solicitação ao servidor:', error.message);
       setOutput('Erro ao executar o comando', "Error message :", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <button onClick={runCommand}>Executar Comando</button>
+    <div>
+    <button onClick={runCommand} disabled={loading}>
+      Executar Comando
+    </button>
+    
+  </div>
   );
 }
 
