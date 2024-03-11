@@ -1,7 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const { exec } = require('child_process');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import { exec } from 'child_process';
+import path from 'path';
+import parseOutput from './test_result_parser.js';
 
 const app = express();
 const port = 3001;
@@ -29,8 +30,8 @@ app.get('/run-command', (req, res) => {
         res.status(500).send('Erro ao executar o comando');
         return;
       }
-      console.log(`Saída do comando: ${stdout}`);
-      res.send(stdout);
+    const parsedOutput = parseOutput(stdout);
+    res.json(parsedOutput);
     });
   });
   

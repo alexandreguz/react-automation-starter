@@ -21,8 +21,12 @@ function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvi
     try {
         console.log("directory: ", directory)
       const response = await fetch(`http://localhost:3001/run-command?dir=${encodeURIComponent(directory)}&command=${encodeURIComponent(finalCommand)}`);
-      const data = await response.text();
-      setOutput(data);
+      const data = await response.json();
+      if (data.success) {
+        setOutput(data.info);
+    } else {
+        setOutput('Erro ao executar o comando. ' + data.message);
+    }
     } catch (error) {
       console.error('Erro ao enviar solicitação ao servidor:', error.message);
       setOutput('Erro ao executar o comando', "Error message :", error.message);
