@@ -52,8 +52,9 @@ function App() {
           </label>
           <br/>
           <label className="input-label">
-            Selecione o Ambiente:
-            <select className="input-select" value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
+            {/* Selecione o Environment para Rodar o Teste: */}
+            <select className="input-select" placeholder='Any String You Want' onChange={(e) => setSelectedEnvironment(e.target.value)}>
+            <option value="">Selecione o Environment: </option>
               {environmentOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}

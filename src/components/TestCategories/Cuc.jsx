@@ -15,7 +15,7 @@ function Cuc({ selectedEnvironment}) {
   return (
     <div>
       <label className="input-label">
-        Selecione o Comando:
+        {/* Selecione o Comando: */}
         <select className="input-select" onChange={(e) => setSelectedCommand(e.target.value)}>
           <option value="">Selecione um Comando</option>
           {CucCommands.map((command, index) => (
