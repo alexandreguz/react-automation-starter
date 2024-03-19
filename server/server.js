@@ -31,6 +31,7 @@ app.get('/run-command', (req, res) => {
         return;
       }
     const parsedOutput = parseOutput(stdout);
+    console.log("OUTPUT: ",parsedOutput)
     res.json(parsedOutput);
     });
   });

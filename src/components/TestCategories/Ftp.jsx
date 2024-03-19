@@ -14,10 +14,10 @@ function Ftp({selectedEnvironment}) {
 
   return (
     <div>
-      <label>
+      <label className="input-label">
         Selecione o Comando:
-        <select onChange={(e) => setSelectedCommand(e.target.value)}>
-          <option value="">Selecione um Comando</option>
+        <select className="input-select" onChange={(e) => setSelectedCommand(e.target.value)}>
+          <option value="">Selecione um Comando: </option>
           {ftpCommands.map((command, index) => (
             <option key={index} value={command}>
               {command}
@@ -37,12 +37,19 @@ function Ftp({selectedEnvironment}) {
       <br />
       <div>{
         loading ? <p>Aguarde, o teste ainda está rodando...</p> :
-      <div>
-      <strong>Saída do Comando:</strong>
-        <pre>{output}</pre>
-        </div>
-      }
+      <div >
+        <strong>Saída do Comando:</strong>
+        <br/><br/><br/><br/><br/><br/><br/>
         
+           <div class="body-text">
+             <div class="title prompt">
+              <pre> 
+                 {output && `Teste: ${selectedCommand}`} <br/> {output}
+              </pre>
+            </div>
+           </div>
+      </div>
+      }
       </div>
     </div>
   );

@@ -4,11 +4,12 @@ import Ftp from './components/TestCategories/Ftp';
 import CreateUser from './components/TestCategories/CreateUser';
 import Cuc from './components/TestCategories/Cuc';
 import { commandOptions, environmentOptions, categories } from './constants';
+import '../src/App.css'
 
 function App() {
   const [directory, setDirectory] = useState('/Users/alexandreguz/Documents/BS2/qa/automation');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedEnvironment, setSelectedEnvironment] = useState('qa');
+  const [selectedEnvironment, setSelectedEnvironment] = useState('Select Environment');
   const [isCategorySelected, setIsCategorySelected] = useState(false);
   const [selectedCommand, setSelectedCommand] = useState('');
 
@@ -26,7 +27,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='App'>
       <NavBar
         categories={categories}
         onSelectCategory={(category) => {
@@ -34,12 +35,15 @@ function App() {
           setIsCategorySelected(true);
         }}
       />
+<br/><br/><br/><br/><br/><br/>
+
       <h1>Automation React App - test category {selectedCategory}</h1>
       {isCategorySelected ? (
         <>
-          <label>
+          <label className="input-label">
             Caminho do Diretório:
             <input
+              className="input-text"
               type="text"
               placeholder="Caminho do Diretório"
               value={directory}
@@ -47,9 +51,9 @@ function App() {
             />
           </label>
           <br/>
-          <label>
+          <label className="input-label">
             Selecione o Ambiente:
-            <select value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
+            <select className="input-select" value={selectedEnvironment} onChange={(e) => setSelectedEnvironment(e.target.value)}>
               {environmentOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}

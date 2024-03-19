@@ -37,7 +37,7 @@ function CommandExecutorButton({ selectedCommand, selectedCategory, selectedEnvi
 
   return (
     <div>
-    <button onClick={runCommand} disabled={loading}>
+    <button className="test-button" onClick={runCommand} disabled={loading}>
       Executar Comando
     </button>
     
