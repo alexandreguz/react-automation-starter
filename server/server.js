@@ -3,6 +3,7 @@ import cors from 'cors';
 import { exec } from 'child_process';
 import path from 'path';
 import parseOutput from './test_result_parser.js';
+import fs from 'fs'
 
 const app = express();
 const port = 3001;
@@ -36,6 +37,17 @@ app.get('/run-command', (req, res) => {
     });
   });
   
+  app.get('/file-content', (req, res) => {
+    const filePath = '/Users/alexandreguz/Documents/BS2/qa/automation/test/generated_test_data.txt';
+  
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro ao ler o arquivo' });
+      }
+      res.send(data);
+    });
+  });
+
   app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
   });

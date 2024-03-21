@@ -1,56 +1,38 @@
-// components/NavBar.jsx
-// import React from 'react';
-
-// function NavBar({ categories, onSelectCategory }) {
-//   return (
-//     <nav>
-//       <ul>
-//         {categories.map((category, index) => (
-//           <li key={index} onClick={() => onSelectCategory(category)}>
-//             {category}
-//           </li>
-//         ))}
-//       </ul>
-//     </nav>
-//   );
-// }
-
-// export default NavBar;
-
 import React, { useState } from 'react';
 import '../App.css'
 
-const NavBar = ({ categories, onSelectCategory }) => {
+const NavBar = ({ categories, onSelectCategory, onViewFileViewer }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
-return (
-<>
-  <nav>
-  <div class="wrapper">
-    <div class="logo"><a href="#">Logo</a></div>
-    <input type="radio" name="slider" id="menu-btn"/>
-    <input type="radio" name="slider" id="close-btn"/>
-    <ul class="nav-links">
-      <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-      {/* <li><a href="#">Home</a></li>
-      <li><a href="#">Automation</a></li> */}
-      <li>
-        <a href="#" class="desktop-item">Tests Categories</a>
-        <input type="checkbox" id="showDrop"/>
-        <label for="showDrop" class="mobile-item">Dropdown Menu</label>
-        <ul class="drop-menu">
-            {categories.map((category, index) => (
-              <li key={index} onClick={() => onSelectCategory(category)}>
-                {category}
-              </li>
-            ))}
-        </ul>
-      </li>
-      {/* <li>
+  return (
+    <>
+      <nav>
+        <div className="wrapper">
+          <div className="logo"><a href="#">Logo</a></div>
+          <input type="radio" name="slider" id="menu-btn"/>
+          <input type="radio" name="slider" id="close-btn"/>
+          <ul className="nav-links">
+            <label htmlFor="close-btn" className="btn close-btn"><i className="fas fa-times"></i></label>
+            <li>
+              <a href="#" className="desktop-item">Tests Categories</a>
+              <input type="checkbox" id="showDrop"/>
+              <label htmlFor="showDrop" className="mobile-item">Dropdown Menu</label>
+              <ul className="drop-menu">
+                {categories.map((category, index) => (
+                  <li key={index} onClick={() => onSelectCategory(category)}>
+                    {category}
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li onClick={onViewFileViewer}>
+              <a href="#" className="desktop-item">File Viewer</a>
+            </li>
+             {/* <li>
         <a href="#" class="desktop-item">Mega Menu</a>
         <input type="checkbox" id="showMega"/>
         <label for="showMega" class="mobile-item">Mega Menu</label>
@@ -90,12 +72,12 @@ return (
         </div>
       </li>
       <li><a href="#">Feedback</a></li> */}
-    </ul>
-    <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
-  </div>
-</nav>
-</>
-);
+          </ul>
+          <label htmlFor="menu-btn" className="btn menu-btn"><i className="fas fa-bars"></i></label>
+        </div>
+      </nav>
+    </>
+  );
 };
 
 export default NavBar;
